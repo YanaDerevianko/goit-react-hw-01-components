@@ -1,30 +1,45 @@
 import propTypes from 'prop-types';
+import {
+  ProfileBox,
+  Avatar,
+  AvatarWrapper,
+  Description,
+  Name,
+  Tag,
+  Location,
+  Stats,
+  StatsItem,
+  StatsItemTitle,
+  StatsItemNumber,
+} from './Profile.styled';
 
-export const Profile = ({ name, tag, location, avatar, stats }) => {
+export const Profile = ({ name, tag, location, avatar, stats: { followers, views, likes } }) => {
   return (
-    <>
-      <div className="description">
-        <img src={avatar} alt={name} className="avatar" />
-        <p className="name">{name}</p>
-        <p className="tag">@{tag}</p>
-        <p className="location">{location}</p>
-      </div>
+    <ProfileBox>
+      <Description>
+        <AvatarWrapper>
+          <Avatar src={avatar} alt={name} />
+        </AvatarWrapper>
+        <Name>{name}</Name>
+        <Tag>@{tag}</Tag>
+        <Location>{location}</Location>
+      </Description>
 
-      <ul className="stats">
-        <li>
-          <span className="label">Followers</span>
-          <span className="quantity">{stats.followers}</span>
-        </li>
-        <li>
-          <span className="label">Views</span>
-          <span className="quantity">{stats.views}</span>
-        </li>
-        <li>
-          <span className="label">Likes</span>
-          <span className="quantity">{stats.likes}</span>
-        </li>
-      </ul>
-    </>
+      <Stats>
+        <StatsItem>
+          <StatsItemTitle>Followers</StatsItemTitle>
+          <StatsItemNumber>{followers}</StatsItemNumber>
+        </StatsItem>
+        <StatsItem>
+          <StatsItemTitle>Views</StatsItemTitle>
+          <StatsItemNumber>{views}</StatsItemNumber>
+        </StatsItem>
+        <StatsItem>
+          <StatsItemTitle>Likes</StatsItemTitle>
+          <StatsItemNumber>{likes}</StatsItemNumber>
+        </StatsItem>
+      </Stats>
+    </ProfileBox>
   );
 };
 Profile.propTypes = {
@@ -32,11 +47,7 @@ Profile.propTypes = {
   tag: propTypes.string.isRequired,
   location: propTypes.string.isRequired,
   avatar: propTypes.string.isRequired,
-  stats: propTypes.arrayOf(
-    propTypes.exact({
-      followers: propTypes.number.isRequired,
-      views: propTypes.number.isRequired,
-      likes: propTypes.number.isRequired,
-    }),
-  ),
+  followers: propTypes.number,
+  views: propTypes.number,
+  likes: propTypes.number,
 };

@@ -1,0 +1,26 @@
+import { Profile } from '../Profile/Profile';
+import { Statistics } from '../Statistics/Statistics';
+import { FriendList } from '../FriendList/FriendList';
+import { TransactionHistory } from '../TransactionHistory/TransactionHistory';
+import user from '../../user';
+import statisticalData from '../../statistical-data';
+import friends from '../../friends';
+import transactions from '../../transactions';
+import {Container} from "./App.styled";
+
+export const App = () => {
+  return (
+    <Container>
+      <Profile
+        name={user.name}
+        tag={user.tag}
+        location={user.location}
+        avatar={user.avatar}
+        stats={user.stats}
+      />
+      <Statistics title="Upload stats" statisticalData={statisticalData} />
+      <FriendList friends={friends} />
+      <TransactionHistory items={transactions} />
+    </Container>
+  );
+};
